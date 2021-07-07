@@ -26,10 +26,15 @@ passport.use(
       callbackURL: '/auth/google/callback'
     },
     (accessToken, refreshToken, profile, done) => {
-      new User({googleId:profile.id}).save();
-      // console.log('access token', accessToken);
-      // console.log('refresh token', refreshToken);
-      // console.log('profile:', profile);
+      User.findOne({googleId:profile.id}).then(existingUser=>{
+        if(existingUser){
+          console.log('already user exist')
+        }
+        else{
+           new User({googleId:profile.id}).save();
+        }
+      })
+     
     }
   )
 )
