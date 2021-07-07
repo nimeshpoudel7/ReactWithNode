@@ -28,10 +28,11 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       User.findOne({googleId:profile.id}).then(existingUser=>{
         if(existingUser){
-          console.log('already user exist')
+          console.log('already user exist',existingUser)
+          done(null,existingUser);
         }
         else{
-           new User({googleId:profile.id}).save();
+           new User({googleId:profile.id}).save().then(user=>done(null,user))
         }
       })
      
