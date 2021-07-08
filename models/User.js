@@ -6,7 +6,8 @@ const {Schema}=mongoose;
 //to create userSchemna
 const userSchema=new Schema({
     googleId:String,
-    name:String
+    name:String,
+    githubId:String
 }) 
 
 mongoose.model('users',userSchema)

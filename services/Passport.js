@@ -19,9 +19,17 @@ passport.use(
       callbackURL: '/auth/github/callback'
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log('access token', accessToken);
-      console.log('refresh token', refreshToken);
-      console.log('profile:', profile);
+     User.findOne({githubId:profile.id}).then(existingUser=>{
+        if(existingUser){
+          console.log('already user exist',existingUser)
+          done(null,existingUser);
+        }
+        else{
+           new User({githubId:profile.id}).save().then(user=>done(null,user))
+        }
+      })
+       console.log('profile:', profile.id);
+
     }
   )
 )

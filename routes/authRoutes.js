@@ -9,5 +9,10 @@ app.get('/auth/google/callback',passport.authenticate('google'))
 
 //gitHub
 app.get('/auth/github', passport.authenticate('github'));
+
 app.get('/auth/github/callback',passport.authenticate('github'))
+//
+app.get('/api/current_user', (res,req)=>{
+    res.send(req.user)
+})
 }
