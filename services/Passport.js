@@ -4,6 +4,9 @@ const passport=require('passport');
 const mongoose = require('mongoose');
 const User =mongoose.model('users')
 const keys=require('../config/keys');
+passport.serializeUser((user,done)=>{
+  done(null,user.id)
+})
 passport.use(
   new GithubStrategy(
     {
