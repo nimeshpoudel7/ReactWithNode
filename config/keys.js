@@ -1,5 +1,5 @@
 //keys.js figure out what set of cerdential to return
-if(process.env.NODE_ENV==='production'){
+if(process.env.NODE_ENV==='prouduction'){
 // production
 module.exports=require('./prod');
 
