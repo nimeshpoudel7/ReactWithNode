@@ -1,58 +1,40 @@
-const GoogleStrategy=require('passport-google-oauth20').Strategy
-const GithubStrategy=require('passport-github2').Strategy;
-const passport=require('passport');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
-const User =mongoose.model('users')
-const Keys=require('../config/keys');
-passport.serializeUser((user,done)=>{
-  done(null,user.id)
-})
-passport.deserializeUser((id,done)=>{
-  User.findById(id)
-  .then((user)=>done(null,user))
-})
-passport.use(
-  new GithubStrategy(
-    {
-      clientID: Keys.githubClientID,
-      clientSecret: Keys.githubClientSecret,
-      callbackURL: '/auth/github/callback'
-    },
-    (accessToken, refreshToken, profile, done) => {
-     User.findOne({githubId:profile.id}).then(existingUser=>{
-        if(existingUser){
-          console.log('already user exist',existingUser)
-          done(null,existingUser);
-        }
-        else{
-           new User({githubId:profile.id}).save().then(user=>done(null,user))
-        }
-      })
-       console.log('profile:', profile.id);
+const keys = require('../config/keys');
 
-    }
-  )
-)
+const User = mongoose.model('users');
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
-      clientID: Keys.googleClientID,
-      clientSecret: Keys.googleClientSecret,
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
       callbackURL: '/auth/google/callback',
-      proxy: true
-
+      proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({googleId:profile.id}).then(existingUser=>{
-        if(existingUser){
-          console.log('already user exist',existingUser)
-          done(null,existingUser);
+      User.findOne({ googleId: profile.id }).then((existingUser) => {
+        if (existingUser) {
+          // we already have a record with the given profile ID
+          done(null, existingUser);
+        } else {
+          // we don't have a user record with this ID, make a new record!
+          new User({ googleId: profile.id })
+            .save()
+            .then((user) => done(null, user));
         }
-        else{
-           new User({googleId:profile.id}).save().then(user=>done(null,user))
-        }
-      })
-     
+      });
     }
   )
-)
+);
