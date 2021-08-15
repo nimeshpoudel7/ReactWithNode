@@ -6,5 +6,5 @@ module.exports=require('./prod');
 }else{
     //developmetn
     //suruma import and export
-    module.exports = require('./Dev');
+    module.exports = require('./dev');
 }
