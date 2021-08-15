@@ -1,21 +1,28 @@
-const passport = require('passport');
+const passport=require('passport');
+//Google
+module.exports=(app)=>{
+app.get('/auth/google', passport.authenticate('google',{
+    scope:['profile','email']
+})
+);
+app.get('/auth/google/callback',passport.authenticate('google'))
 
-module.exports = app => {
-  app.get(
-    '/auth/google',
-    passport.authenticate('google', {
-      scope: ['profile', 'email']
-    })
-  );
+//gitHub
+app.get('/auth/github', passport.authenticate('github'));
 
-  app.get('/auth/google/callback', passport.authenticate('google'));
+app.get('/auth/github/callback',passport.authenticate('github'))
 
-  app.get('/api/logout', (req, res) => {
+//logout
+app.get('/api/logout',(req,res)=>{
     req.logout();
     res.send(req.user);
-  });
+})
+//login apxi
+app.get('/api/current_user', (req,res)=>{
+    res.send(req.user.id)
+})
+app.get('/', (req,res)=>{
+     res.send('hey')
+})
 
-  app.get('/api/current_user', (req, res) => {
-    res.send(req.user);
-  });
-};
+}
