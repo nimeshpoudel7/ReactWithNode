@@ -7,6 +7,7 @@ app.get('/auth/google', passport.authenticate('google',{
 );
 app.get('/auth/google/callback',passport.authenticate('google'))
 
+
 //gitHub
 app.get('/auth/github', passport.authenticate('github'));
 
