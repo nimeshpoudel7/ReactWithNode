@@ -1,8 +1,6 @@
-
-//dev.js---dont commit this
-module.exports ={
-googleClientID:'493824631047-s4njff2fn4t03s2tkh6bbhnsp68hofk2.apps.googleusercontent.com',
-googleClientSecret:'TKR82JFYEcAJKFB1VYUd8QH4',
-mongoURI:'mongodb+srv://emailbd:Pd8RYAsANtNPgGmB@emaily.pwqvx.mongodb.net/nimesh?retryWrites=true&w=majority',
-cookieKey:'asdfghjklilejmafjnajfnajf'
-}
+module.exports = {
+  googleClientID: '971783566749-13q8omiumhaqie399lsqa85au56ru8e1.apps.googleusercontent.com',
+  googleClientSecret: 'a_wW-Z81LBRGf1cPRYJwZ0-7',
+  mongoURI: 'mongodb+srv://emaildb2:7TsFiSsmR8PXJhiT@cluster0.eazn3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  cookieKey: 'jlkjfdklajfdajiejijijfdf',
+};
