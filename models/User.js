@@ -1,13 +1,21 @@
+// const mongoose = require('mongoose');
+// // const Schema= mongoose.Schema;
+// // upper value is same as below
+// const {Schema}=mongoose;
+
+// //to create userSchemna
+// const userSchema=new Schema({
+//     googleId:String,
+//     name:String,
+//     githubId:String
+// }) 
+
+// mongoose.model('users',userSchema)
 const mongoose = require('mongoose');
-// const Schema= mongoose.Schema;
-// upper value is same as below
-const {Schema}=mongoose;
+const { Schema } = mongoose;
 
-//to create userSchemna
-const userSchema=new Schema({
-    googleId:String,
-    name:String,
-    githubId:String
-}) 
+const userSchema = new Schema({
+  googleId: String
+});
 
-mongoose.model('users',userSchema)
+mongoose.model('users', userSchema);
