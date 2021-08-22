@@ -10,13 +10,14 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "client":"npm run start --prefix client",
-    "dev":"concurrently \"npm run server\" \"npm run client\""
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cookie-session": "^1.4.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "form-data": "^4.0.0",
     "mongoose": "^5.13.2",
